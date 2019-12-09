@@ -273,9 +273,12 @@ class LDAP(object):
     @staticmethod
     def error(e):
         e = e[0]
-        if 'desc' in e:
-            return e['desc']
-        else:
+        try:
+            if 'desc' in e:
+                return e['desc']
+        except TypeError:
+            pass
+        finally:
             return e
 
     @staticmethod
